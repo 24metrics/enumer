@@ -196,7 +196,13 @@ name := MyTypeValue.String() // name => "my_type_value"
 
 ## How to use
 
-There are four boolean flags: `json`, `bson`, `text`, `yaml` and `sql`. You can use any combination of them (i.e. `enumer -type=Pill -json -text`),
+For a module-aware repo with `enumer` in the `go.mod` file, generation can be called by adding the following to a `.go` source file:
+
+```golang
+//go:generate go run github.com/dmarkham/enumer -type=YOURTYPE
+```
+
+There are five boolean flags: `json`, `bson`, `text`, `yaml` and `sql`. You can use any combination of them (i.e. `enumer -type=Pill -json -text`),
 
 For enum string representation transformation the `transform` and `trimprefix` flags
 were added (i.e. `enumer -type=MyType -json -transform=snake`).
@@ -207,6 +213,8 @@ If a prefix is provided via the `trimprefix` flag, it will be trimmed from the s
 it is transformed). If a name doesn't have the prefix it will be passed unchanged.
 
 If a prefix is provided via the `addprefix` flag, it will be added to the start of each name (after trimming and after transforming).
+
+The boolean flag `values` will additionally create an alternative string values method `Values() []string` to fullfill the `EnumValues` interface of [ent](https://entgo.io/docs/schema-fields/#enum-fields).
 
 ## Inspiring projects
 
